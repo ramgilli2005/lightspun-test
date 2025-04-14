@@ -197,6 +197,8 @@ Communication between claim_process and payments services:
    - The payments service subscribes to this queue and processes the payment based on the net fee
 
 2. Handling Failures:
+   - Use a state machine to track claim processing failures. 
+   - The failure can be at Patient level or provider level. Ensure adequate handling is done at Patient and Provider level before processing payment.
    - Use a transactional outbox pattern to ensure message delivery
    - Store outgoing messages in a database table as part of the claim processing transaction
    - A separate process reads from this table and publishes messages to the queue
